@@ -4,6 +4,7 @@ export default function Leave(){
     <div>
       <h3>Request Leave</h3>
       <p className="text-muted">Apply for leave form & status.</p>
+      <h1>hiii</h1>
     </div>
   );
 }
