@@ -17,7 +17,7 @@ const route = useLocation().pathname;
 
 
 const menu = [
-{ to: "/", icon: <FaHome />, label: "Dashboard" },
+{ to: "/dashboard", icon: <FaHome />, label: "Dashboard" },
 { to: "/clock", icon: <FaUserClock />, label: "Clock" },
 { to: "/attendance", icon: <FaUserClock />, label: "Attendance" },
 { to: "/performance", icon: <FaChartLine />, label: "Performance" },

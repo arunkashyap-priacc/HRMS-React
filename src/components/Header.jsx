@@ -1,9 +1,15 @@
 import React, { useContext } from "react";
 import { FaBell, FaMoon, FaSun } from "react-icons/fa";
 import { ThemeContext } from "../context/ThemeContext";
+import { useNavigate } from "react-router-dom";
 
-function Header() {
+function Header({ userName }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/signin");
+  };
 
   return (
     <div
@@ -12,12 +18,10 @@ function Header() {
       style={{ transition: "0.3s" }}
     >
       <h4 className="fw-bold m-0">
-        Welcome back, Arun Kashyap!
+        Welcome back, {userName}!
       </h4>
 
       <div className="d-flex align-items-center gap-4">
-
-        {/* 🔔 Bell Icon */}
         <div className="position-relative">
           <FaBell size={22} color={theme === "dark" ? "white" : "black"} />
           <span className="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-circle">
@@ -25,27 +29,15 @@ function Header() {
           </span>
         </div>
 
-        {/* 🌙 DARK / ☀️ LIGHT BUTTON */}
         <button
           onClick={toggleTheme}
           className={`btn border-0 p-2 rounded-circle 
             ${theme === "light" ? "btn-light" : "btn-secondary"}`}
-          style={{
-            width: 40,
-            height: 40,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
+          style={{ width: 40, height: 40, display: "flex", alignItems: "center", justifyContent: "center" }}
         >
-          {theme === "light" ? (
-            <FaMoon size={18} />
-          ) : (
-            <FaSun size={18} color="orange" />
-          )}
+          {theme === "light" ? <FaMoon size={18} /> : <FaSun size={18} color="orange" />}
         </button>
 
-        {/* 👤 Profile */}
         <div className="d-flex align-items-center">
           <img
             src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
@@ -53,15 +45,16 @@ function Header() {
             style={{ width: 40, borderRadius: "50%" }}
           />
           <div className="ms-2">
-            <p className="fw-bold m-0">Arun Kashyap</p>
+            <p className="fw-bold m-0">{userName}</p>
             <small className={`${theme === "dark" ? "text-light" : "text-muted"}`}>
               Employee
             </small>
           </div>
         </div>
 
-        {/* 🔴 Logout */}
-        <button className="btn btn-danger">Logout</button>
+        <button className="btn btn-danger" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </div>
   );
