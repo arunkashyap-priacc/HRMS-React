@@ -19,7 +19,7 @@ const data = [
   { name: "Thu", value: 5 },
   { name: "Fri", value: 4 },
   { name: "Sat", value: 3 },
-  { name: "Sun", value: 5 },
+  { name: "Sun", value: 4 },
 ];
 
 export default function Dashboard() {
