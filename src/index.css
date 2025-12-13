@@ -1,49 +1,50 @@
 /* --------------------------------------
    GLOBAL
 ---------------------------------------*/
+/* --------------------------------------
+   GLOBAL
+---------------------------------------*/
 body {
   font-family: "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Light mode */
+/* Light Mode */
 body[data-theme="light"] {
   background: #f8f9fa;
   color: #222;
 }
 
-/* Dark mode */
+/* Dark Mode */
 body[data-theme="dark"] {
   background: #1e1e1e;
   color: #e2e2e2;
 }
 
-body[data-theme="dark"] .card {
-  background: #2a2a2a !important;
-  color: #fff;
+/* --------------------------------------
+   DARK GLOBAL ELEMENTS
+---------------------------------------*/
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .status-card {
+  background: #262626 !important;
+  color: #fff !important;
+  border-color: #444 !important;
 }
 
 body[data-theme="dark"] .header {
   background: #2a2a2a !important;
-  color: white;
+  color: #fff;
 }
 
-body[data-theme="dark"] .sidebar {
-  background: #232323 !important;
-  color: white;
-}
-
-body[data-theme="dark"] .sidebar a {
-  color: #eee;
-}
-
-body[data-theme="dark"] .sidebar a:hover {
-  background: #333;
+body[data-theme="dark"] .main-content {
+  background: #1b1b1b !important;
   color: #fff;
 }
 
 /* --------------------------------------
+   SIDEBAR
    SIDEBAR
 ---------------------------------------*/
 .sidebar {
@@ -52,9 +53,9 @@ body[data-theme="dark"] .sidebar a:hover {
   position: fixed;
   top: 0;
   left: 0;
-  transition: 0.3s;
+  background: #fff;
   padding-top: 20px;
-  background: white;
+  transition: 0.3s;
   z-index: 2000;
 }
 
@@ -63,8 +64,9 @@ body[data-theme="dark"] .sidebar a:hover {
 }
 
 .sidebar ul,
+.sidebar ul,
 .sidebar li {
-  list-style: none !important;
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -74,11 +76,11 @@ body[data-theme="dark"] .sidebar a:hover {
   align-items: center;
   gap: 14px;
   padding: 12px 20px;
-  text-decoration: none;
   color: #444;
+  text-decoration: none;
   border-radius: 8px;
   margin: 8px 0;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .sidebar a:hover,
@@ -93,23 +95,21 @@ body[data-theme="dark"] .sidebar a:hover {
 
 .sidebar.close a {
   justify-content: center;
-  padding: 12px 0;
 }
 
-.sidebar a svg,
-.sidebar a i {
-  font-size: 20px;
-  min-width: 22px;
-  color: #444;
+/* Sidebar Dark */
+body[data-theme="dark"] .sidebar {
+  background: #222;
 }
 
-/* Toggle button */
-.toggle-btn {
-  cursor: pointer;
-  margin-left: 15px;
-  margin-bottom: 25px;
-  z-index: 2100;
-  position: relative;
+body[data-theme="dark"] .sidebar a {
+  color: #eaeaea;
+}
+
+body[data-theme="dark"] .sidebar a:hover,
+body[data-theme="dark"] .active-link a {
+  background: #333;
+  color: #0d6efd;
 }
 
 /* --------------------------------------
@@ -126,89 +126,52 @@ body[data-theme="dark"] .sidebar a:hover {
   width: calc(100% - 70px);
 }
 
-/* Signin page full width */
 body.signin-active .main-content {
-  margin-left: 0 !important;
-  width: 100% !important;
+  margin-left: 0;
+  width: 100%;
 }
 
 /* --------------------------------------
    HEADER
 ---------------------------------------*/
 .header {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
+  background: #fff;
   position: sticky;
   top: 0;
   z-index: 1500;
-  transition: 0.3s;
-  background: white;
-}
-
-body[data-theme="dark"] .header {
-  background: #2a2a2a;
-  color: white;
-}
-
-.header h4 {
-  font-size: 18px;
-  margin: 0;
-  flex: 1;
-}
-
-.header .d-flex.align-items-center.gap-4 {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header .position-relative .badge {
-  font-size: 10px;
-  width: 16px;
-  height: 16px;
 }
 
 /* --------------------------------------
-   DASHBOARD CARD
+   DASHBOARD CARDS
 ---------------------------------------*/
 .status-card {
   background: linear-gradient(135deg, #2196f3, #0d6efd);
-  color: white;
-  border-radius: 14px;
+  color: #fff;
   padding: 25px;
+  border-radius: 14px;
 }
 
 .stat-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: #fff;
   padding: 18px 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-body[data-theme="dark"] .stat-card {
-  background: #2a2a2a;
-  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* --------------------------------------
-   QUICKSLIDER
+   QUICK SLIDER
 ---------------------------------------*/
 .quickslider-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.3);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
-  transition: 0.3s ease;
+  transition: 0.3s;
   z-index: 1040;
 }
 
@@ -219,12 +182,7 @@ body[data-theme="dark"] .stat-card {
 
 .quickslider-card .card {
   border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(20,20,50,0.08);
-}
-
-body[data-theme="dark"] .quickslider-card .card {
-  background: #2a2a2a;
-  color: #fff;
+  box-shadow: 0 12px 30px rgba(20, 20, 50, 0.08);
 }
 
 /* --------------------------------------
@@ -256,7 +214,7 @@ body[data-theme="dark"] .quickslider-card .card {
   padding: 8px 10px;
   border-radius: 50%;
   font-size: 18px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
 
@@ -315,6 +273,100 @@ body[data-theme="dark"] .quickslider-card .card {
   font-weight: 500;
   cursor: pointer;
 }
+/* --------------------------------------
+   PAYSLIPS
+---------------------------------------*/
+.payslips-page {
+  padding: 25px;
+}
+
+.payslips-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+/* --------------------------------------
+   MEDIA QUERIES (MOBILE)
+---------------------------------------*/
+@media (max-width: 768px) {
+  .main-content.expanded,
+  .main-content.collapsed {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .sidebar {
+    position: fixed;
+    z-index: 2000;
+    height: 100%;
+    top: 0;
+    left: -240px;
+    transition: 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .sidebar.close {
+    left: -240px;
+  }
+
+  .stat-card {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .status-card {
+    padding: 18px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 15px;
+    gap: 10px;
+  }
+
+  .header h4 {
+    font-size: 16px;
+  }
+
+  .header .d-flex.align-items-center.gap-4 {
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .toggle-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 2100;
+  }
+}
+
+/* Extra small mobile tweaks */
+@media (max-width: 576px) {
+  .signin-card {
+    width: 90%;
+    padding: 30px;
+  }
+  .payslips-card {
+    padding: 25px;
+  }
+}
+
+.forgot-link {
+  margin-top: 15px;
+  text-align: center;
+  color: #1565ff;
+  font-weight: 500;
+  cursor: pointer;
+}
 
 /* --------------------------------------
    PAYSLIPS PAGE
@@ -342,7 +394,7 @@ body[data-theme="dark"] .quickslider-card .card {
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
   margin-bottom: 20px;
 }
 

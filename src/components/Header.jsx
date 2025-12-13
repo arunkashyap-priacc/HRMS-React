@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FaBell, FaMoon, FaSun } from "react-icons/fa";
-import { ThemeContext } from "../context/ThemeContext";
+import { ThemeContext } from "../context/ThemeProvider"; // make sure path is correct
 import { useNavigate } from "react-router-dom";
 
 function Header({ userName }) {
@@ -17,25 +17,34 @@ function Header({ userName }) {
       ${theme === "light" ? "bg-white" : "bg-dark text-white"}`}
       style={{ transition: "0.3s" }}
     >
-      <h4 className="fw-bold m-0">
-        Welcome back, {userName}!
-      </h4>
+      <h4 className="fw-bold m-0">Welcome back, {userName}!</h4>
 
       <div className="d-flex align-items-center gap-4">
         <div className="position-relative">
-          <FaBell size={22} color={theme === "dark" ? "white" : "black"} />
+          <FaBell size={22} />
           <span className="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-circle">
             5
           </span>
         </div>
 
+        {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className={`btn border-0 p-2 rounded-circle 
+          className={`btn border-0 p-2 rounded-circle theme-btn 
             ${theme === "light" ? "btn-light" : "btn-secondary"}`}
-          style={{ width: 40, height: 40, display: "flex", alignItems: "center", justifyContent: "center" }}
+          style={{
+            width: 40,
+            height: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
-          {theme === "light" ? <FaMoon size={18} /> : <FaSun size={18} color="orange" />}
+          {theme === "light" ? (
+            <FaMoon size={18} />
+          ) : (
+            <FaSun size={18} color="orange" />
+          )}
         </button>
 
         <div className="d-flex align-items-center">
@@ -46,7 +55,9 @@ function Header({ userName }) {
           />
           <div className="ms-2">
             <p className="fw-bold m-0">{userName}</p>
-            <small className={`${theme === "dark" ? "text-light" : "text-muted"}`}>
+            <small
+              className={`${theme === "dark" ? "text-light" : "text-muted"}`}
+            >
               Employee
             </small>
           </div>

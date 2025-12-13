@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -14,42 +19,39 @@ import Holidays from "./pages/Holidays";
 import Clock from "./pages/Clock";
 import SignIn from "./pages/SignIn";
 
+import ThemeProvider from "./context/ThemeProvider";
+
+/* ------------------------------------
+   Layout Wrapper (INSIDE Router)
+------------------------------------ */
 function LayoutWrapper() {
+  const location = useLocation();
   const [userName, setUserName] = useState("");
 
-  const location = useLocation();
+  const isMobile = window.innerWidth <= 768;
+  const [toggle, setToggle] = useState(!isMobile);
 
-  // ------------------------------
-  // Set sidebar initial state based on screen width
-  // ------------------------------
- const isMobile = window.innerWidth <= 768;
-const [toggle, setToggle] = useState(!isMobile); // desktop open, mobile closed
+  const hideLayout =
+    location.pathname === "/" || location.pathname === "/signin";
 
-
+  /* Hide sidebar/header on signin */
   useEffect(() => {
-    // Hide header/sidebar for signin and root path
-    if (location.pathname === "/signin" || location.pathname === "/") {
+    if (hideLayout) {
       document.body.classList.add("signin-active");
     } else {
       document.body.classList.remove("signin-active");
     }
-  }, [location.pathname]);
+  }, [hideLayout]);
 
-  // Update sidebar on resize
+  /* Sidebar responsive control */
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setToggle(false); // mobile → close
-      } else {
-        setToggle(true);  // desktop → open
-      }
+      setToggle(window.innerWidth > 768);
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const hideLayout = location.pathname === "/signin" || location.pathname === "/";
 
   return (
     <div className="d-flex">
@@ -64,7 +66,10 @@ const [toggle, setToggle] = useState(!isMobile); // desktop open, mobile closed
 
         <Routes>
           <Route path="/" element={<SignIn setUserName={setUserName} />} />
-          <Route path="/signin" element={<SignIn setUserName={setUserName} />} />
+          <Route
+            path="/signin"
+            element={<SignIn setUserName={setUserName} />}
+          />
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/attendance" element={<Attendance />} />
@@ -80,10 +85,15 @@ const [toggle, setToggle] = useState(!isMobile); // desktop open, mobile closed
   );
 }
 
+/* ------------------------------------
+   App Root
+------------------------------------ */
 export default function App() {
   return (
-    <Router>
-      <LayoutWrapper />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <LayoutWrapper />
+      </Router>
+    </ThemeProvider>
   );
 }
