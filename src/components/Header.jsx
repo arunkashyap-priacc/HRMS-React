@@ -1,42 +1,29 @@
 import React, { useContext } from "react";
 import { FaBell, FaMoon, FaSun } from "react-icons/fa";
-import { ThemeContext } from "../context/ThemeContext";
+import { ThemeContext } from "../context/ThemeProvider"; // make sure path is correct
 
 function Header() {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div
-      className={`header shadow-sm px-4 py-3 d-flex justify-content-between align-items-center 
-      ${theme === "light" ? "bg-white" : "bg-dark text-white"}`}
-      style={{ transition: "0.3s" }}
-    >
-      <h4 className="fw-bold m-0">
-        Welcome back, Arun Kashyap!
-      </h4>
+    <div className="header shadow-sm px-4 py-3 d-flex justify-content-between align-items-center">
+      {/* Welcome */}
+      <h4 className="fw-bold m-0">Welcome back, Arun Kashyap!</h4>
 
+      {/* Right Section */}
       <div className="d-flex align-items-center gap-4">
-
-        {/* 🔔 Bell Icon */}
+        {/* Notification Bell */}
         <div className="position-relative">
-          <FaBell size={22} color={theme === "dark" ? "white" : "black"} />
+          <FaBell size={22} />
           <span className="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-circle">
             5
           </span>
         </div>
 
-        {/* 🌙 DARK / ☀️ LIGHT BUTTON */}
+        {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className={`btn border-0 p-2 rounded-circle 
-            ${theme === "light" ? "btn-light" : "btn-secondary"}`}
-          style={{
-            width: 40,
-            height: 40,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
+          className="btn border-0 p-2 rounded-circle theme-btn"
         >
           {theme === "light" ? (
             <FaMoon size={18} />
@@ -45,7 +32,7 @@ function Header() {
           )}
         </button>
 
-        {/* 👤 Profile */}
+        {/* Profile */}
         <div className="d-flex align-items-center">
           <img
             src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
@@ -54,13 +41,11 @@ function Header() {
           />
           <div className="ms-2">
             <p className="fw-bold m-0">Arun Kashyap</p>
-            <small className={`${theme === "dark" ? "text-light" : "text-muted"}`}>
-              Employee
-            </small>
+            <small>Employee</small>
           </div>
         </div>
 
-        {/* 🔴 Logout */}
+        {/* Logout */}
         <button className="btn btn-danger">Logout</button>
       </div>
     </div>
