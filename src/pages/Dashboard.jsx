@@ -18,7 +18,7 @@ const data = [
   { name: "Wed", value: 2 },
   { name: "Thu", value: 5 },
   { name: "Fri", value: 4 },
-  { name: "Sat", value: 3 },
+  { name: "Sat", value: 5 },
   { name: "Sun", value: 5 },
 ];
 
