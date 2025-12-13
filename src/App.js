@@ -18,12 +18,16 @@ function LayoutWrapper() {
   const [userName, setUserName] = useState("");
 
   const location = useLocation();
-  const [toggle, setToggle] = useState(true);
 
   // ------------------------------
-  // Add/remove body class
+  // Set sidebar initial state based on screen width
   // ------------------------------
+ const isMobile = window.innerWidth <= 768;
+const [toggle, setToggle] = useState(!isMobile); // desktop open, mobile closed
+
+
   useEffect(() => {
+    // Hide header/sidebar for signin and root path
     if (location.pathname === "/signin" || location.pathname === "/") {
       document.body.classList.add("signin-active");
     } else {
@@ -31,7 +35,20 @@ function LayoutWrapper() {
     }
   }, [location.pathname]);
 
-  // Hide header/sidebar for signin and root path
+  // Update sidebar on resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setToggle(false); // mobile → close
+      } else {
+        setToggle(true);  // desktop → open
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const hideLayout = location.pathname === "/signin" || location.pathname === "/";
 
   return (
