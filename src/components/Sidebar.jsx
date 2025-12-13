@@ -15,7 +15,7 @@ function Sidebar({ toggle, setToggle }) {
   const route = useLocation().pathname;
 
   const menu = [
-    { to: "/", icon: <FaHome />, label: "Dashboard" },
+    { to: "/dashboard", icon: <FaHome />, label: "Dashboard" },
     { to: "/clock", icon: <FaUserClock />, label: "Clock" },
     { to: "/attendance", icon: <FaUserClock />, label: "Attendance" },
     { to: "/performance", icon: <FaChartLine />, label: "Performance" },
@@ -25,18 +25,25 @@ function Sidebar({ toggle, setToggle }) {
     { to: "/holidays", icon: <FaCalendar />, label: "Holidays" },
   ];
 
+  // Detect mobile width
+  const isMobile = window.innerWidth <= 768;
+
+  const handleLinkClick = () => {
+    if (isMobile) {
+      setToggle(false); // mobile par auto-close
+    }
+  };
+
   return (
-    <div className={`sidebar shadow ${toggle ? "open" : "close"}`}>
-      {/* Toggle Button */}
+    <div className={`sidebar ${toggle ? "open" : "close"}`}>
       <div className="toggle-btn" onClick={() => setToggle(!toggle)}>
         <FaBars size={22} />
       </div>
 
-      {/* Menu */}
       <ul className="menu-list">
         {menu.map((item) => (
           <li key={item.to} className={route === item.to ? "active-link" : ""}>
-            <Link to={item.to}>
+            <Link to={item.to} onClick={handleLinkClick}>
               {item.icon} <span>{item.label}</span>
             </Link>
           </li>
