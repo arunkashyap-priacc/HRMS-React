@@ -33,7 +33,7 @@ function Leave() {
   return (
     <div className="container-fluid px-4 py-3">
       {/* Page Heading */}
-      <h2 className="fw-bold">Request Leave</h2>
+      <h2 className="fw-bold">Request Leaves</h2>
       <p className="text-muted">Submit your leave requests and track their status</p>
 
       {/* Leave Form Card */}
