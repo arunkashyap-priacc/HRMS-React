@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StatCard from "../components/StatCard";
 import { FiCheckCircle, FiCalendar, FiStar } from "react-icons/fi";
 import { AiOutlineWallet } from "react-icons/ai";
@@ -23,6 +23,23 @@ const data = [
 ];
 
 export default function Dashboard() {
+  // ✅ ADDED (as you provided)
+  const [loginTime, setLoginTime] = useState("--:--");
+  const [logoutTime, setLogoutTime] = useState("--:--");
+
+  useEffect(() => {
+    const login = localStorage.getItem("loginTime");
+    const logout = localStorage.getItem("logoutTime");
+
+    if (login) {
+      setLoginTime(new Date(login).toLocaleTimeString());
+    }
+
+    if (logout) {
+      setLogoutTime(new Date(logout).toLocaleTimeString());
+    }
+  }, []);
+
   return (
     <div>
       <div className="status-card mb-4">
@@ -60,9 +77,13 @@ export default function Dashboard() {
               }}
             >
               <div style={{ fontSize: 13 }}>Login Time</div>
-              <div style={{ fontSize: 24, fontWeight: 700 }}>09:00:53</div>
+              {/* ✅ REPLACED VALUE ONLY */}
+              <div style={{ fontSize: 24, fontWeight: 700 }}>
+                {loginTime}
+              </div>
             </div>
           </div>
+
           <div className="col-md-6 mb-3">
             <div
               style={{
@@ -72,7 +93,10 @@ export default function Dashboard() {
               }}
             >
               <div style={{ fontSize: 13 }}>Logout Time</div>
-              <div style={{ fontSize: 24, fontWeight: 700 }}>--:--</div>
+              {/* ✅ REPLACED VALUE ONLY */}
+              <div style={{ fontSize: 24, fontWeight: 700 }}>
+                {logoutTime}
+              </div>
             </div>
           </div>
 
@@ -95,6 +119,7 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* बाकी dashboard SAME */}
       <div className="row g-3 mb-4">
         <div className="col-md-3">
           <StatCard title="Present Days" value="10">
