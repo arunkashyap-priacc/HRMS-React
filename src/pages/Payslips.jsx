@@ -23,7 +23,7 @@ export default function Payslips() {
           alt="document"
           style={{ width: "80px", marginBottom: "15px" }}
         />
-        <p>No payslips found for your account.</p>
+        <p>No payslips found for your account</p>
         <a
           href="mailto:hr@example.com"
           style={{ color: "#0d6efd", textDecoration: "none" }}
